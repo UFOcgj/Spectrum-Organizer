@@ -11,12 +11,18 @@ permissions:
 
 jobs:
   unittest:
-    name: Python 3.14 / no Origin
+    name: Python 3.14 / no Origin / shard ${{ matrix.shard }}
     runs-on: windows-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
     env:
       PYTHONDONTWRITEBYTECODE: "1"
       QT_QPA_PLATFORM: offscreen
+      SHARD_COUNT: "4"
+      SHARD_INDEX: ${{ matrix.shard }}
 
     steps:
       - name: Check out repository
@@ -33,4 +39,15 @@ jobs:
         run: python -m pip install -e .
 
       - name: Run automated tests
-        run: python -B -m unittest discover -s tests -p "test_*.py"
+        shell: pwsh
+        run: |
+          $modules = @(Get-ChildItem tests\test_*.py | Sort-Object Name | ForEach-Object { "tests.$($_.BaseName)" })
+          $selected = @()
+          for ($index = [int]$env:SHARD_INDEX; $index -lt $modules.Count; $index += [int]$env:SHARD_COUNT) {
+            $selected += $modules[$index]
+          }
+          if ($selected.Count -eq 0) {
+            throw "Test shard $env:SHARD_INDEX is empty."
+          }
+          Write-Host "Running $($selected.Count) of $($modules.Count) test modules in shard $env:SHARD_INDEX."
+          python -B -m unittest $selected
