@@ -1,10 +1,10 @@
-# Spectrum Organizer 使用说明
+# 使用说明
 
 Spectrum Organizer 用于整理 Origin 光谱项目，针对HORIBA FluoroMax-4 Spectrofluorometer开发。程序读取一个或多个原始项目，在界面中完成样品归属和冲突选择后，生成新的整理项目和运行报告；原始项目不会被修改。
 
 ## 一、下载并打开程序
 
-程序适用于 Windows 10/11 64 位电脑。电脑上需要安装并激活 Origin 2021 或更高版本；目前验证使用的是 OriginPro 2023。程序自带 Python 组件，不需要另外安装 Python 或开发工具。
+程序适用于 Windows 10/11 64 位电脑。电脑上需要安装并激活 Origin 2021 或更高版本。程序自带 Python 组件，不需要另外安装 Python 或开发工具。
 
 1. 打开本仓库的 **Releases** 页面，下载 `Spectrum_Organizer_*.zip`；
 2. 将 ZIP 完整解压到一个普通文件夹；
