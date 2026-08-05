@@ -1,0 +1,16 @@
+[project]
+name = "origin-spectrum-organizer"
+version = "0.1.0"
+description = "Book-only Origin spectrum organizer under active development."
+requires-python = ">=3.14"
+dependencies = [
+    "PySide6",
+    "pywin32>=312",
+    "originpro==1.1.15",
+]
+
+[project.scripts]
+spectrum-organizer = "spectrum_organizer.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,46 @@
+# Experimental and Origin project data
+*.opj
+*.opju
+*.opj.*
+*.opju.*
+
+# Runtime reports, logs, evidence, and local state
+Run_Report_*.txt
+logs/
+evidence/
+docs/superpowers/evidence/
+.superpowers/
+.codex/
+.agents/
+.backups/
+AGENTS.md
+task_plan.md
+findings.md
+progress.md
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.test-tmp/
+.test-name-matrix/
+.test-space-measure/
+.manual-ui-localappdata/
+
+# Environments and build output
+.venv/
+venv/
+build/
+dist/
+
+# OS and editor residue
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
