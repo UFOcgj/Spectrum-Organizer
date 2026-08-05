@@ -53,7 +53,7 @@ class Task17PackagingTests(unittest.TestCase):
                     {"value": 2},
                 )
 
-            self.assertEqual(audit_dir, event_path.parent)
+            self.assertEqual(audit_dir.resolve(strict=True), event_path.parent)
             self.assertEqual([], list(audit_dir.glob("*.pending")))
             event = json.loads(event_path.read_text(encoding="utf-8"))
             self.assertEqual(1, event["schema_version"])
