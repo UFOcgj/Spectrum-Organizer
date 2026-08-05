@@ -23,6 +23,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Reject personal email metadata
+        shell: pwsh
+        run: |
+          $privateEmailPattern = '^REDACTED$'
+          $exposed = git log --format='%ae%n%ce' | Where-Object { $_ -match $privateEmailPattern }
+          if ($exposed) {
+            throw "Public commit history contains a personal email address."
+          }
+
       - name: Set up Python 3.14
         uses: actions/setup-python@v7
         with:
