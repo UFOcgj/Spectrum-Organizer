@@ -39,7 +39,7 @@ flowchart LR
 
 ## 验证边界
 
-当前代码库的完整自动化回归包含 1700 项测试，覆盖解析、归属、冲突、输出计划、进程边界、取消和打包契约。GitHub Actions 在 Windows 上运行不启动 Origin 的自动测试；真实 `.opj` / `.opju` 输出仍通过装有 Origin 的 Windows 10/11 环境人工验收。
+本地完整回归包含 1700 项测试，覆盖解析、归属、冲突、输出计划、进程边界、取消和打包契约。GitHub Actions 在 Windows 上运行其中 532 项可移植核心测试，不启动 Origin；真实 `.opj` / `.opju` 输出仍通过装有 Origin 的 Windows 10/11 环境人工验收。
 
 ## 当前版本边界
 
