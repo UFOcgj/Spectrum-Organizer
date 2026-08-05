@@ -53,4 +53,5 @@ jobs:
           tests.test_settings
           tests.test_special_groups
           tests.test_state_machine
+          tests.test_task17_packaging
           tests.test_validity
