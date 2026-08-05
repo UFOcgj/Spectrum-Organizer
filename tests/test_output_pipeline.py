@@ -38,10 +38,13 @@ class OutputPipelineTests(unittest.TestCase):
             audit_dir.mkdir()
             output_parent = root / "output"
             output_parent.mkdir()
+            canonical_output_parent = output_parent.resolve(strict=True)
             temp_root = root / "task-temp"
             temp_root.mkdir()
             staging = output_parent / ".staging-run-1"
             final_dir = output_parent / "Organized_Origin_Data_20260802_120000"
+            canonical_staging = canonical_output_parent / staging.name
+            canonical_final_dir = canonical_output_parent / final_dir.name
             project_name = "Organized_Spectra_20260802_120000.opju"
             report_name = "Run_Report_20260802_120000.txt"
             targets = SimpleNamespace(
@@ -123,11 +126,11 @@ class OutputPipelineTests(unittest.TestCase):
                 )
             self.assertEqual([], by_type["output_stage_attempt"][0]["output_parent_entries_before"])
             self.assertEqual(
-                str(staging),
+                str(canonical_staging),
                 by_type["output_staging_created"][0]["staging_dir"],
             )
             self.assertEqual(
-                str(targets.verifier_mutation_path),
+                str(canonical_staging / targets.verifier_mutation_path.name),
                 by_type["output_staging_created"][0][
                     "verifier_mutation_path"
                 ],
@@ -139,7 +142,10 @@ class OutputPipelineTests(unittest.TestCase):
             publication = by_type["publication_committed"][0]
             self.assertEqual("approved-1", publication["approved_snapshot_id"])
             self.assertEqual("run-1", publication["run_id"])
-            self.assertEqual(str(final_dir), publication["final_run_dir"])
+            self.assertEqual(
+                str(canonical_final_dir),
+                publication["final_run_dir"],
+            )
             self.assertEqual(2, len(publication["artifacts"]))
 
     def test_cancel_during_precommit_publication_returns_immediately_and_prevents_publish(self):
