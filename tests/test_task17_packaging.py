@@ -437,11 +437,12 @@ class Task17PackagingTests(unittest.TestCase):
 
         readme = readme_path.read_text(encoding="utf-8")
         self.assertTrue(readme.startswith("Spectrum Organizer 使用说明"))
-        self.assertIn("一、怎么打开程序", readme)
-        self.assertIn("双击“Spectrum Organizer.exe”", readme)
+        self.assertIn("针对HORIBA FluoroMax-4 Spectrofluorometer开发", readme)
+        self.assertIn("一、下载并打开程序", readme)
+        self.assertIn("双击 Spectrum Organizer.exe", readme)
         self.assertIn("不要在 ZIP 压缩包里直接运行", readme)
         self.assertIn("支持 .opj 和 .opju", readme)
-        self.assertIn("一次任务可以只选一个，也可以同时选择多个", readme)
+        self.assertIn("一次任务可以只选一个文件，也可以同时选择多个", readme)
         self.assertIn("按住 Ctrl 或 Shift", readme)
         self.assertIn("二、可以选择哪些原始文件", readme)
         self.assertIn("三、程序会生成什么", readme)
@@ -461,10 +462,10 @@ class Task17PackagingTests(unittest.TestCase):
         self.assertNotIn("六、遇到问题怎么办", readme)
         self.assertLess(
             readme.index("三、程序会生成什么"),
-            readme.index("Run_Report_*.txt 记录本次输入"),
+            readme.index("运行报告记录本次输入"),
         )
         self.assertLess(
-            readme.index("Run_Report_*.txt 记录本次输入"),
+            readme.index("运行报告记录本次输入"),
             readme.index("四、程序怎样整理输出项目"),
         )
         self.assertNotIn("不是对原始文件的要求", readme)
@@ -473,7 +474,8 @@ class Task17PackagingTests(unittest.TestCase):
         self.assertNotIn("七、当前分发状态", readme)
         self.assertNotIn("测试分发包", readme)
         self.assertNotIn("清洁机验证", readme)
-        self.assertIn("不要只复制程序文件", readme)
+        self.assertIn("不要只复制 EXE", readme)
+        self.assertIn("当前版本不会输出特殊谱", readme)
         self.assertLess(
             readme.index("二、可以选择哪些原始文件"),
             readme.index("三、程序会生成什么"),

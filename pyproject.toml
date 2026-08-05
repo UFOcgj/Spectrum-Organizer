@@ -1,7 +1,7 @@
 [project]
 name = "origin-spectrum-organizer"
 version = "0.1.0"
-description = "Book-only Origin spectrum organizer under active development."
+description = "Windows application for organizing HORIBA FluoroMax-4 spectra in Origin."
 requires-python = ">=3.14"
 dependencies = [
     "PySide6",
