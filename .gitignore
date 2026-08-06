@@ -44,3 +44,23 @@ Thumbs.db
 Desktop.ini
 *.swp
 *~
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Runtime databases and diagnostics
+*.sqlite3
+*.sqlite3-*
+settings.json
+*.log
+*.dmp
+*.pdb
+
+# Locally built release archives
+*.zip
