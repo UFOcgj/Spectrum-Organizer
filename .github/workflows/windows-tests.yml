@@ -25,13 +25,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Reject personal email metadata
+      - name: Reject non-noreply commit email metadata
         shell: pwsh
         run: |
-          $privateEmailPattern = '^REDACTED$'
-          $exposed = git log --format='%ae%n%ce' | Where-Object { $_ -match $privateEmailPattern }
-          if ($exposed) {
-            throw "Public commit history contains a personal email address."
+          $emails = @(
+            git log --all --format='%ae%n%ce' |
+              Where-Object { $_ } |
+              ForEach-Object { $_.Trim().ToLowerInvariant() } |
+              Sort-Object -Unique
+          )
+
+          $badCount = @(
+            $emails | Where-Object {
+              $_ -notmatch '^(?:[^@\s]+@users\.noreply\.github\.com|noreply@github\.com)$'
+            }
+          ).Count
+
+          if ($badCount -gt 0) {
+            throw "Public refs contain $badCount non-noreply commit email address(es)."
           }
 
       - name: Set up Python 3.14
